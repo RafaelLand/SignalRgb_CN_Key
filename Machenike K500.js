@@ -38,10 +38,34 @@ export function ControllableParameters() {
     ];
 }
 
+const vKeyNames = [
+    // Linha de Funções
+    'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
+    'PrtSc', 'Pause',
+    
+    // Linha de Números
+    '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
+    
+    // Linha QWERTY
+    'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\',
+    
+    // Linha ASDF
+    'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter',
+    
+    // Linha ZXCV
+    'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift',
+    
+    // Teclas modificadoras e espaço
+    'Ctrl', 'Win', 'Alt', 'Space', 'AltGr', 'Fn', 'Ctrl', 'Left', 'Down', 'Up', 'Right', 'Insert', 'Del',
+    
+    // Bloco Numérico
+    'NumLock', 'Num/', 'Num*', 'Num-', 'Num7', 'Num8', 'Num9', 'Num+', 'Num4', 'Num5', 'Num6', 'Num+', 'Num1', 'Num2', 'Num3', 'Enter', 'Num0', 'Num.'
+];
+
 const vKeyPositions = [
     // Linha de Funções
-    [0, 0], [2, 0], [4, 0], [6, 0], [8, 0], [10, 0], [12, 0], [14, 0], [16, 0], [18, 0], [20, 0], [22, 0], [24, 0], // ESC, F1-F12
-    [26, 0], [28, 0], // PrtSc, Pause
+    [0, 0], [2, 0], [4, 0], [6, 0], [8, 0], [10, 0], [12, 0], [14, 0], [16, 0], [18, 0], [20, 0], [22, 0],
+    [24, 0], [26, 0], // PrtSc, Pause
 
     // Linha de Números
     [0, 2], [2, 2], [4, 2], [6, 2], [8, 2], [10, 2], [12, 2], [14, 2], [16, 2], [18, 2], [20, 2], [22, 2], [24, 2], // `, 1-0, -, =
@@ -64,30 +88,6 @@ const vKeyPositions = [
     [26, 6], [28, 6], [30, 6], [32, 6], // Num4, Num5, Num6, Num+
     [26, 8], [28, 8], [30, 8], [32, 8], // Num1, Num2, Num3, Enter
     [28, 10], [30, 10], // Num0, Num.
-];
-
-const vKeyNames = [
-    // Linha de Funções
-    'ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
-    'PrtSc', 'Pause',
-    
-    // Linha de Números
-    '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
-    
-    // Linha QWERTY
-    'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\',
-    
-    // Linha ASDF
-    'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter',
-    
-    // Linha ZXCV
-    'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift',
-    
-    // Teclas modificadoras e espaço
-    'Ctrl', 'Win', 'Alt', 'Space', 'AltGr', 'Fn', 'Ctrl', 'Left', 'Down', 'Up', 'Right', 'Insert', 'Del',
-    
-    // Bloco Numérico
-    'NumLock', 'Num/', 'Num*', 'Num-', 'Num7', 'Num8', 'Num9', 'Num+', 'Num4', 'Num5', 'Num6', 'Num+', 'Num1', 'Num2', 'Num3', 'Enter', 'Num0', 'Num.'
 ];
 
 // Função para renderizar as cores no teclado
