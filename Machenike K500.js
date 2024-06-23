@@ -1,67 +1,40 @@
-/* 
-Time:2023/2/14
-Author: dangc
-*/
-
-export function Name() { return "Machenike K500"; }
-export function VendorId() { return 0x258A; }
-export function ProductId() { return 0x0050; }
-export function Publisher() { return "dangc"; }
-export function Documentation() { return "gettingstarted/srgbmods-net-info"; }
-export function Size() { return [36, 12]; }
-export function DefaultPosition(){return [10, 100]; }
-export function DefaultScale(){return 12.0}
-
-export function ControllableParameters() {
-	return [
-		{"property":"shutdownColor", "group":"lighting", "label":"Shutdown Color", "min":"0", "max":"360", "type":"color", "default":"009bde"},
-		{"property":"LightingMode", "group":"lighting", "label":"Lighting Mode", "type":"combobox", "values":["Canvas", "Forced"], "default":"Canvas"},
-		{"property":"forcedColor", "group":"lighting", "label":"Forced Color", "min":"0", "max":"360", "type":"color", "default":"009bde"},
-	];
+export function Name() {
+    return "Mechanike K500";
 }
 
-const vKeyNames = [
-    // Linha de Funções
-    'ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
-    'PrtSc', 'Pause', // Adicionais
-    
-    // Linha de Números
-    '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
-    
-    // Linha QWERTY
-    'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\',
-    
-    // Linha ASDF
-    'CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter',
-    
-    // Linha ZXCV
-    'Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift',
-    
-    // Teclas modificadoras e espaço
-    'Ctrl', 'Win', 'Alt', 'Space', 'AltGr', 'Fn', 'Ctrl', 'Left', 'Down', 'Up', 'Right', 'Insert', 'Del',
-    
-    // Bloco Numérico
-    'NumLock', 'Num7', 'Num8', 'Num9', 'Num/', 'Num4', 'Num5', 'Num6', 'Num*', 'Num1', 'Num2', 'Num3', 'Num0', 'Num.'
-];
-Código Combinado
-Aqui está o código atualizado para o seu teclado maior:
+export function VendorId() {
+    return 0x258A;
+}
 
-javascript
-Copiar código
-export function Name() { return "Teclado Personalizado 96%"; }
-export function VendorId() { return 0x258A; }
-export function ProductId() { return 0x0050; }  // Atualize o ProductId se necessário
-export function Publisher() { return "dangc"; }
-export function Documentation() { return "gettingstarted/srgbmods-net-info"; }
-export function Size() { return [36, 12]; }
-export function DefaultPosition() { return [10, 100]; }
-export function DefaultScale() { return 12.0 }
+export function ProductId() {
+    return 0x0050;
+}
+
+export function Publisher() {
+    return "dangc";
+}
+
+export function Documentation() {
+    return "gettingstarted/srgbmods-net-info";
+}
+
+export function Size() {
+    return [36, 12];
+}
+
+export function DefaultPosition() {
+    return [10, 100];
+}
+
+export function DefaultScale() {
+    return 12.0;
+}
 
 export function ControllableParameters() {
     return [
-        {"property":"shutdownColor", "group":"lighting", "label":"Shutdown Color", "min":"0", "max":"360", "type":"color", "default":"009bde"},
+        {"property":"shutdownColor", "group":"lighting", "label":"Shutdown Color", "min":"0", "max":"360", "type":"color", "default":"#009bde"},
         {"property":"LightingMode", "group":"lighting", "label":"Lighting Mode", "type":"combobox", "values":["Canvas", "Forced"], "default":"Canvas"},
-        {"property":"forcedColor", "group":"lighting", "label":"Forced Color", "min":"0", "max":"360", "type":"color", "default":"009bde"},
+        {"property":"forcedColor", "group":"lighting", "label":"Forced Color", "min":"0", "max":"360", "type":"color", "default":"#009bde"},
     ];
 }
 
@@ -93,7 +66,6 @@ const vKeyPositions = [
     [28, 10], [30, 10], // Num0, Num.
 ];
 
-
 const vKeyNames = [
     // Linha de Funções
     'ESC', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
@@ -118,77 +90,70 @@ const vKeyNames = [
     'NumLock', 'Num/', 'Num*', 'Num-', 'Num7', 'Num8', 'Num9', 'Num+', 'Num4', 'Num5', 'Num6', 'Num+', 'Num1', 'Num2', 'Num3', 'Enter', 'Num0', 'Num.'
 ];
 
-
-export function LedNames() {
-	return vKeyNames;
-
-}
-
-export function LedPositions() {
-	return vKeyPositions;
-}
-
+// Função para renderizar as cores no teclado
 export function Render() {
-	sendColors();
-	
+    sendColors();
 }
 
+// Função para desligar a iluminação do teclado
 export function Shutdown() {
-
+    sendColors(true); // Chamada para desligar as cores
 }
 
-function sendColors(shutdown = false)
-{
-	let rgbdata = grabColors(shutdown);
-
-	let packet = [0x08,0x0a,0x7a,0x01,0x00,0x00,0x00];
-
-	packet = packet.concat(rgbdata);	
-	device.send_report(packet, 520)
-
-
-}
-function grabColors(shutdown) 
-{
-	let rgbdata = [];
-	for(let iIdx = 0; iIdx < vKeyPositions.length; iIdx++)
-	{
-		let iPxX = vKeyPositions[iIdx][0];
-		let iPxY = vKeyPositions[iIdx][1];
-		let color;
-
-		if(shutdown)
-		{
-			color = hexToRgb(shutdownColor);
-		}
-		else if (LightingMode === "Forced")
-		{
-			color = hexToRgb(forcedColor);
-		}
-		else
-		{
-			color = device.color(iPxX, iPxY);
-		}
-		rgbdata[iIdx*3] = color[0];
-		rgbdata[iIdx*3 + 1] = color[1];
-		rgbdata[iIdx*3 + 2] = color[2];
-	}
-	return rgbdata;
-}
-function hexToRgb(hex) 
-{
-	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-	let colors = [];
-	colors[0] = parseInt(result[1], 16);
-	colors[1] = parseInt(result[2], 16);
-	colors[2] = parseInt(result[3], 16);
-
-	return colors;
+// Função para enviar as cores para o dispositivo
+function sendColors(shutdown = false) {
+    let rgbdata = grabColors(shutdown);
+    let packet = [0x08, 0x0a, 0x7a, 0x01, 0x00, 0x00, 0x00];
+    packet = packet.concat(rgbdata);
+    device.send_report(packet, 520);
 }
 
+// Função para obter as cores com base no modo de iluminação atual
+function grabColors(shutdown) {
+    let rgbdata = [];
+    for (let i = 0; i < vKeyPositions.length; i++) {
+        let x = vKeyPositions[i][0];
+        let y = vKeyPositions[i][1];
+        let color;
+
+        if (shutdown) {
+            color = hexToRgb(shutdownColor);
+        } else if (LightingMode === "Forced") {
+            color = hexToRgb(forcedColor);
+        } else {
+            color = device.color(x, y);
+        }
+
+        rgbdata.push(color[0], color[1], color[2]);
+    }
+    return rgbdata;
+}
+
+// Função auxiliar para converter cor hexadecimal em RGB
+function hexToRgb(hex) {
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16)
+    ];
+}
+
+// Função para validar o endpoint de comunicação
 export function Validate(endpoint) {
-	return endpoint.interface === 1 && endpoint.usage === 0x0001 && endpoint.usage_page === 0xff00;
+    return endpoint.interface === 1 && endpoint.usage === 0x0001 && endpoint.usage_page === 0xff00;
 }
+
+// Exporta os nomes das LEDs
+export function LedNames() {
+    return vKeyNames;
+}
+
+// Exporta as posições das LEDs
+export function LedPositions() {
+    return vKeyPositions;
+}
+
 
 export function Image() {
 	return "https://m.media-amazon.com/images/I/51zNoaVliBL._AC_SX679_.jpg~";
